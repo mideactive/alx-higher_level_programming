@@ -2,4 +2,5 @@
 from add_0 import add
 a = 1
 b = 2
-add(a, b)
+addval = add(a, b)
+print("{} + {} = {}".format(a, b, addval), end="\n")
