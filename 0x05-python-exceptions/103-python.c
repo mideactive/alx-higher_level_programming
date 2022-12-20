@@ -102,18 +102,3 @@ void print_python_float(PyObject *p)
 	printf("  value: %s\n", buffer);
 	PyMem_Free(buffer);
 }
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-
