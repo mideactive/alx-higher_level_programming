@@ -1,11 +1,7 @@
 #!/usr/bin/node
-const dict = require('./text_files/101-data.js').dict;
-const newDict = {};
-for (const key in dict) {
-  if (newDict[dict[key]] === undefined) {
-    newDict[dict[key]] = [key];
-  } else {
-    newDict[dict[key]].push(key);
-  }
-}
-console.log(newDict);
+const { dict } = require('./101-data');
+const myValue = Object.entries(dict).reduce((acc, [key, value]) => {
+  acc[value] = acc[value] ? [...acc[value], key] : [key];
+  return acc;
+}, {});
+console.log(myValue);
