@@ -1,4 +1,7 @@
 #!/usr/bin/node
+'use strict';
+
 const list = require('./text_files/100-data.js').list;
 console.log(list);
-console.log(list.map((item, index) => item * index));
+const newList = list.map((x, index) => x * index);
+console.log(newList);
