@@ -1,7 +1,17 @@
 #!/usr/bin/node
-const { dict } = require('./101-data');
-const myValue = Object.entries(dict).reduce((acc, [key, value]) => {
-  acc[value] = acc[value] ? [...acc[value], key] : [key];
-  return acc;
-}, {});
-console.log(myValue);
+'use strict';
+
+const dict = require('./101-data').dict;
+
+const usrId = {};
+
+for (const uId in dict) {
+  const occurrence = dict[uId];
+
+  if (occurrence in usrId) {
+    usrId[occurrence].push(uId);
+  } else {
+    usrId[occurrence] = [uId];
+  }
+}
+console.log(usrId);
