@@ -1,7 +1,3 @@
 #!/usr/bin/node
-/*A Rectangle class*/
-class Rectangle {
-  constuctor () {
-  }
-}
-module.exports = Rectangle;
+/* A Rectangle class */
+module.exports = class Rectangle {};
