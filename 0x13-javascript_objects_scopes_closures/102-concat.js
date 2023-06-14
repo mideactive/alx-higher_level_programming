@@ -11,4 +11,3 @@ const data2 = fs.readFileSync(fileB, 'utf8');
 const concatenateData = data1 + data2;
 
 fs.writeFileSync(fileC, concatenateData, 'utf8');
-console.log(`${fileC}`);
