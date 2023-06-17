@@ -4,46 +4,38 @@ import sys
 """A script that takes in an argument and displays all
 values in the state table of hbtn_0e_0_usa"""
 
+if __name__ == '__main__':
+    if len(sys.argv) != 5:
+        print("Usage: <usr> <pw> <db> <sn>")
+    else:
+        us = sys.argv[1]
+        pw = sys.argv[2]
+        dt = sys.argv[3]
+        sn = sys.argv[4]
 
-def get_states(username, password, database, sn):
     # Connect to MySQL server
     db = MySQLdb.connect(
         host='localhost',
         port=3306,
-        user='root',
-        passwd='root',
-        db='hbtn_0e_0_usa'
+        user=us,
+        passwd=pw,
+        db=dt,
     )
 
     # Create a cursor object to interact with the database
     cursor = db.cursor()
 
     # Execute the SQL query to retrieve matching states
-    qr = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(sn)
-    cursor.execute(qr)
+    cursor.execute("SELECT * FROM states WHERE name LIKE BINARY\
+    '{}' ORDER BY id".format(sn))
 
     # Fetch all rows from the result set
     rows = cursor.fetchall()
-
-    # Close the cursor and database connection
-    cursor.close()
-    db.close()
 
     # Print the matching states
     for row in rows:
         print(row)
 
-
-if __name__ == '__main__':
-    # Check if all four arguments are provided
-    if len(sys.argv) != 5:
-        print("Usage: <username> <password> <database> <state>")
-    else:
-        # Retrieve the arguments
-        username = sys.argv[1]
-        password = sys.argv[2]
-        database = sys.argv[3]
-        sn = sys.argv[4]
-
-        # Call the function to get the matching states
-        get_states(username, password, database, sn)
+    # Close the cursor and database connection
+    cursor.close()
+    db.close()
