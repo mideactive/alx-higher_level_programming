@@ -5,13 +5,10 @@ import sys
 values in the state table of hbtn_0e_0_usa"""
 
 if __name__ == '__main__':
-    if len(sys.argv) != 5:
-        print("Usage: <usr> <pw> <db> <sn>")
-    else:
-        us = sys.argv[1]
-        pw = sys.argv[2]
-        dt = sys.argv[3]
-        sn = sys.argv[4]
+    us = sys.argv[1]
+    pw = sys.argv[2]
+    dt = sys.argv[3]
+    sn = sys.argv[4]
 
     # Connect to MySQL server
     db = MySQLdb.connect(
