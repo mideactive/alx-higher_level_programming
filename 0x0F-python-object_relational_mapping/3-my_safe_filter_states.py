@@ -4,14 +4,21 @@ import MySQLdb
 import sys
 
 
-def get_state(username, password, database, sn):
+if __name__ == '__main__':
+    if len(sys.argv) != 5:
+        print("Usage: <un> <pw> <db> <sn>")
+    else:
+        un = sys.argv[1]
+        pw = sys.argv[2]
+        dt = sys.argv[3]
+        sn = sys.argv[4]
     # Connect to db
     conn = MySQLdb.connect(
             host='localhost',
             port=3306,
-            user='root',
-            passwd='root',
-            db='hbtn_0e_0_usa'
+            user=un,
+            passwd=pw,
+            db=dt
             )
     # sql object cursor
     cursor = conn.cursor()
@@ -23,28 +30,14 @@ def get_state(username, password, database, sn):
 
     # fetch rows
 
-    row = cursor.fetchall()
+    rows = cursor.fetchall()
+
+    # print rows
+    for row in rows:
+        print(row)
 
     # Close cursor
     cursor.close()
 
     # Close db
-
     conn.close()
-
-    for row in row:
-        print(row)
-
-
-if __name__ == '__main__':
-    if len(sys.argv) != 5:
-        print("Usage <username> <password> <database> <sn>")
-    else:
-        username = sys.argv[1]
-        password = sys.argv[2]
-        database = sys.argv[3]
-        sn = sys.argv[4]
-
-        # call function
-
-        get_state(username, password, database, sn)
