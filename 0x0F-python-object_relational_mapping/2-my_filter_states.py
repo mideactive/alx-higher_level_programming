@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-import MySQLdb
-import sys
 """A script that takes in an argument and displays all
 values in the state table of hbtn_0e_0_usa"""
+import MySQLdb
+import sys
 
 if __name__ == '__main__':
     us = sys.argv[1]
