@@ -1,18 +1,25 @@
 #!/usr/bin/python3
-import MySQLdb
-import sys
 """A script that lists all cities in
 hbtn_0e_4_usa db"""
 
+import MySQLdb
+import sys
 
-def get_cities(username, password, database):
+if __name__ == '__main__':
+    if len(sys.argv) != 4:
+        print("Usage: <username> <password> <database>")
+    else:
+        un = sys.argv[1]
+        pw = sys.argv[2]
+        dt = sys.argv[3]
+
     # Connect my mysql db
     conn = MySQLdb.connect(
             host='localhost',
             port=3306,
-            user='root',
-            passwd='root',
-            db='hbtn_0e_4_usa'
+            user=un,
+            passwd=pw,
+            db=dt
             )
     # Myslq object cursor
     cursor = conn.cursor()
@@ -28,23 +35,11 @@ def get_cities(username, password, database):
 
     rows = cursor.fetchall()
 
+    # print rows
+    for row in rows:
+        print(row)
+
     # Close cursor & db
 
     cursor.close()
     conn.close()
-
-    for row in rows:
-        print(row)
-
-
-if __name__ == '__main__':
-    if len(sys.argv) != 4:
-        print("Usage: <username> <password> <database>")
-    else:
-        username = sys.argv[1]
-        password = sys.argv[2]
-        database = sys.argv[3]
-
-        # Call function
-
-        get_cities(username, password, database)
