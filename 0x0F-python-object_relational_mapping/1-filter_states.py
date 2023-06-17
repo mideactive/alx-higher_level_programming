@@ -6,28 +6,23 @@ import MySQLdb
 import sys
 
 if __name__ == '__main__':
-    h = 'localhost'
+    h = "localhost"
     us = sys.argv[1]
     pw = sys.argv[2]
     dt = sys.argv[3]
 
-    db = MySQLdb.connect(
-        host=h,
-        port=3306,
-        user=us,
-        passwd=pw,
-        db=dt
-    )
+    db = MySQLdb.connect(host=h, port=3306, user=us, passwd=pw, db=dt)
 
     # Create a cursor object
     cursor = db.cursor()
 
     # Execute the SQL query to select states
-    cursor.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
+
+    cursor.execute("SELECT *\
+            FROM states WHERE name LIKE BINARY 'N%' ORDER BY id")
 
     # fetch rows
     rows = cursor.fetchall()
-
     for row in rows:
         print(row)
 
