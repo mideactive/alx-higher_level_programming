@@ -1,7 +1,7 @@
 #!/usr/bin/python3
+"""A script that prevents mysql injection"""
 import MySQLdb
 import sys
-"""A script that prevents mysql injection"""
 
 
 def get_state(username, password, database, sn):
@@ -18,7 +18,7 @@ def get_state(username, password, database, sn):
 
     # Query mysql db
 
-    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
+    query = "SELECT * FROM states WHERE name LIKE BINARY %s ORDER BY id"
     cursor.execute(query, (sn,))
 
     # fetch rows
