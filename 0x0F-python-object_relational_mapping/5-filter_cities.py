@@ -30,17 +30,19 @@ if __name__ == '__main__':
     cursor = db.cursor()
 
     # Execute the SQL query to retrieve cities of the specified state
-    query = "SELECT cities.name FROM cities\
-        JOIN states ON states.id = cities.state_id WHERE states.name = %s\
-        ORDER BY cities.id"
-    cursor.execute(query, (state_name, ))
+    cursor.execute("""
+            SELECT cities.name
+            FROM cities
+            JOIN states ON cities.state_id = states.id
+            WHERE states.name = %s
+            ORDER BY cities.id ASC
+        """, (state_name,))
 
     # Fetch all rows from the result set
-    rows = cursor.fetchall()
-
+    cities = cursor.fetchall()
     # Print the cities
-    for row in rows:
-        print(row)
+    city_names = [city[0] for city in cities]
+    print(", ".join(city_names))
 
     # Close the cursor and database connection
     cursor.close()
