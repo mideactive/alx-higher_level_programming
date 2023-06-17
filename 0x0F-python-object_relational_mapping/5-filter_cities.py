@@ -30,10 +30,9 @@ if __name__ == '__main__':
     cursor = db.cursor()
 
     # Execute the SQL query to retrieve cities of the specified state
-    query = "SELECT DISTINCT cities.name\
-             FROM cities JOIN states\
-             ON cities.state_id = states.id\
-             WHERE states.name = %s"
+    query = "SELECT cities.name FROM cities\
+        JOIN states ON states.id = cities.state_id WHERE states.name = %s\
+        ORDER BY cities.id"
     cursor.execute(query, (state_name, ))
 
     # Fetch all rows from the result set
