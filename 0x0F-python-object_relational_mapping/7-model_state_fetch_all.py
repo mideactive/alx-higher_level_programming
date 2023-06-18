@@ -6,12 +6,13 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
 
+if __name__ == '__main__':
+    un = sys.argv[1]
+    pw = sys.argv[2]
+    dt = sys.argv[3]
 
-def list_states(username, password, database):
-    """Lists all State objects from the database hbtn_0e_6_usa."""
-    # Connect to the MySQL server running on localhost at port 3306
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
-                           .format(username, password, database))
+    engine = create_engine('mysql+mysqldb://{}:{}@locahost:3306/{}'
+            .format(un, pw, dt))
 
     # Create a session
     Session = sessionmaker(bind=engine)
@@ -24,10 +25,3 @@ def list_states(username, password, database):
 
     # Close the session
     session.close()
-
-
-if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Usage: {} <username> <password> <database>".format(sys.argv[0]))
-        sys.exit(1)
-    list_states(sys.argv[1], sys.argv[2], sys.argv[3])
