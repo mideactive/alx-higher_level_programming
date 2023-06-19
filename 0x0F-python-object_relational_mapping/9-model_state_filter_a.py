@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""list all state objects that contain the letter a from hbtn_0o_6_usa"""
+"""list all state objects that contain the letter a from hbtn_0o_6_usa."""
 
 from sys import argv
 from model_state import Base, State
