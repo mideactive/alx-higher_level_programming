@@ -5,18 +5,14 @@
 
 
 def find_peak(list_of_integers):
-    if not list_of_integers:
+    """ Return the max number from a list.
+
+    list_of_integers: list
+    """
+    if len(list_of_integers) == 0:
         return None
-
-    low = 0
-    high = len(list_of_integers) - 1
-
-    while low < high:
-        mid = (low + high) // 2
-
-        if list_of_integers[mid] > list_of_integers[mid + 1]:
-            high = mid
-        else:
-            low = mid + 1
-
-    return list_of_integers[low]
+    peak = list_of_integers[0]
+    for i in range(1, len(list_of_integers)):
+        if list_of_integers[i] > peak:
+            peak = list_of_integers[i]
+    return peak
