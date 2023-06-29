@@ -1,3 +1,3 @@
 #!/bin/bash
 # A script that takes a url and displays all HTTP methods
-curl -s "$1" -X OPTIONS -i | grep -i allow
+curl -sI "$1" | grep -i "Allow" | cut -d " " -f2-
