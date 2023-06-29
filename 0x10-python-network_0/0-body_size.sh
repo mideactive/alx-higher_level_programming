@@ -3,12 +3,17 @@
 # Sends request to the URL
 # Displays the size of the body
 # The curl command must be used
-if [ $# -eq 0 ]; then
-	echo "Please provide URL."
+#!/bin/bash
 
-	exit 1
+# Check if the URL argument is provided
+if [[ -z "$1" ]]; then
+  echo "Please provide a URL as an argument."
+  exit 1
 fi
 
-url=$1
-response=$(curl -sSL -w "%{size_download}" -o /dev/null "$url")
+# Send a request to the URL and store the response body in a variable
+response=$(curl -s -w "%{size_download}" -o /dev/null "$1")
+
+# Display the size of the response body in bytes
 echo "$response"
+
