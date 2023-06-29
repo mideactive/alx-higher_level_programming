@@ -5,15 +5,6 @@
 # The curl command must be used
 #!/bin/bash
 
-# Check if the URL argument is provided
-if [[ -z "$1" ]]; then
-  echo "Please provide a URL as an argument."
-  exit 1
-fi
-
 # Send a request to the URL and store the response body in a variable
-response=$(curl -s -w "%{size_download}" -o /dev/null "$1")
-
-# Display the size of the response body in bytes
-echo "$response"
+curl -sI "$1" | grep "Content-Length" | awk '{print $2}'
 
