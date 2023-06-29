@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # A script that takes, send and display url size
 
 url=$1
