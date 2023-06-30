@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-""" A script that lists all states from hbtn_0e_6_usa db"""
+"""Script that prints state object with name as argument passed to it"""
 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 import sys
 from model_state import Base, State
-from sqlalchemy import (create_engine)
-from sqlalchemy.orm import sessionmaker
 
 
 if __name__ == "__main__":
@@ -16,6 +16,9 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
 
     session = Session()
-    for instance in session.query(State).order_by(State.id):
-        print("{}: {}".format(instance.id, instance.name))
+    query = session.query(State).filter(State.name.like(sys.argv[4]))
+    for instance in query:
+        print("{}".format(instance.id))
+    if (len(query.all()) == 0):
+        print("Not found")
     session.close()

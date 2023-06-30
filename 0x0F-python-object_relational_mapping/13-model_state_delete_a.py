@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-""" A script that lists all states from hbtn_0e_6_usa db"""
+"""A script that deletes all state object
+containing leter a"""
 
-import sys
-from model_state import Base, State
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker
-
+from model_state import Base, State
+import sys
 
 if __name__ == "__main__":
     engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
@@ -16,6 +16,8 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
 
     session = Session()
-    for instance in session.query(State).order_by(State.id):
-        print("{}: {}".format(instance.id, instance.name))
+    sobj = session.query(State).filter(State.name.like('%a%')).all()
+    for obj in sobj:
+        session.delete(obj)
+    session.commit()
     session.close()
