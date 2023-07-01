@@ -5,16 +5,20 @@ import requests
 import sys
 
 if __name__ == '__main__':
-     if len(sys.argv) < 2:
-        print("No result")
-    else:
-        payload = {'q': sys.argv[1]}
-        resp = requests.post('http://0.0.0.0:5000/search_user', data=payload)
+    url = 'http://0.0.0.0:5000/search_user'
+    letter = sys.argv[1] if len(sys.argv) > 1 else ''
 
-        r_json = resp.json()
-        if r_json and type(r_json) == dict:
-            print("[{}] {}".format(r_json['id'], r_json['name']))
-        elif r_json == {}:
-            print("No result")
+    # Create a dictionary with the letter parameter
+    data = {'q': letter}
+
+    # Send POST request with the letter as a parameter
+    response = requests.post(url, json=data)
+
+    try:
+        json_data = response.json()
+        if 'id' in json_data and 'name' in json_data:
+            print("[{}] {}".format(json_data['id'], json_data['name']))
         else:
-            print("Not a valid JSON")
+            print("No result")
+    except ValueError:
+        print("Not a valid JSON")
