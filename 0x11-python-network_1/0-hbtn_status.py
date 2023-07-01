@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-# A script that fetches url contient
+"""A script that fetches url contient"""
 from urllib.request import Request, urlopen
 
 if __name__ == '__main__':
     url = 'https://alx-intranet.hbtn.io/status'
-    with urlopen(url) as req:
-        r = req.read()
+    with urlopen(url) as resp:
+        r = resp.read()
 
     tp = type(r)
     cont = r.decode('utf-8')
