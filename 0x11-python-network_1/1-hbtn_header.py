@@ -10,8 +10,4 @@ if __name__ == '__main__':
     r1 = Request(url)
 
     with urlopen(r1) as r:
-        r2 = r.headers.get("X-Request-ID")
-        if r2:
-            sys.stdout.write(r2 + "\n")
-        else:
-            sys.stdout.write("X-Request-Id header not ound\n")
+        print(r.info()['X-Request-Id'])
