@@ -5,15 +5,16 @@ import requests
 import sys
 
 if __name__ == '__main__':
-    url = 'http://0.0.0.0:5000/search_user'
-    letter = sys.argv[2] if len(sys.argv) > 1 else ''
-    data = {'q': letter}
-    resp = requests.post(url, data=data)
-    try:
-        json_data = resp.json()
-        if json_data:
-            print("[{}] {}".format(json_data['id'], json_data['name']))
-        else:
+     if len(sys.argv) < 2:
+        print("No result")
+    else:
+        payload = {'q': sys.argv[1]}
+        resp = requests.post('http://0.0.0.0:5000/search_user', data=payload)
+
+        r_json = resp.json()
+        if r_json and type(r_json) == dict:
+            print("[{}] {}".format(r_json['id'], r_json['name']))
+        elif r_json == {}:
             print("No result")
-    except:
-        print("Not a valid JSON")
+        else:
+            print("Not a valid JSON")
