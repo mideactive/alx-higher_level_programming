@@ -5,8 +5,9 @@ displays the the variable X-Reqest-Id"""
 import requests
 import sys
 
-url = sys.argv[1]
-resp = requests.get(url)
-if 'X-Request-Id' in resp.headers:
-    r = resp.headers['X-Request-Id']
+if __name__ == '__main__':
+    url = sys.argv[1]
+    resp = requests.get(url)
+    if 'X-Request-Id' in resp.headers:
+        r = resp.headers['X-Request-Id']
     print(r)
