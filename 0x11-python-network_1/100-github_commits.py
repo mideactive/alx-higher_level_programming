@@ -4,22 +4,12 @@ import requests
 import sys
 
 if __name__ == "__main__":
-    repository = sys.argv[1]  # Repository name
-    owner = sys.argv[2]  # Owner name
-
-    url = f"https://api.github.com/repos/{owner}/{repository}/commits"
-
-    # Send GET request to retrieve the commits
-    response = requests.get(url)
-
-    # Check the response status code
-    if response.status_code == 200:
-        commits = response.json()
-
-    # Iterate over the 10 most recent commits
-    for commit in commits[:10]:
-        sha = commit['sha']
-        author_name = commit['commit']['author']['name']
-        print(f"{sha}: {author_name}")
-    else:
-        print("Error:", response.status_code)
+    resp = requests.get('https://api.github.com/repos/{}/{}/commits'
+                        .format(sys.argv[2], sys.argv[1]))
+    r_json = resp.json()
+    for i in range(len(r_json)):
+        if i >= 10:
+            break
+        diction = r_json[i]
+        print("{}: {}".format(diction['sha'],
+                              diction['commit']['author']['name']))
