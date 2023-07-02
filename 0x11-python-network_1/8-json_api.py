@@ -2,23 +2,19 @@
 """A script that takes letter, sends post request
 to url with letter param"""
 import requests
-import sys
+from sys import argv
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     url = 'http://0.0.0.0:5000/search_user'
-    letter = sys.argv[1] if len(sys.argv) > 1 else ''
-
-    # Create a dictionary with the letter parameter
-    data = {'q': letter}
-
-    # Send POST request with the letter as a parameter
-    response = requests.post(url, json=data)
-
+    q = ""
+    if len(argv) > 1:
+        q = argv[1]
+    r = requests.post(url, data={'q': q})
     try:
-        json_data = response.json()
-        if 'id' in json_data and 'name' in json_data:
-            print("[{}] {}".format(json_data['id'], json_data['name']))
-        else:
+        json = r.json()
+        if len(json) == 0:
             print("No result")
+        else:
+            print("[{}] {}".format(json['id'], json['name']))
     except ValueError:
         print("Not a valid JSON")
