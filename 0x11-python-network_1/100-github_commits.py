@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Get github commits for the last 10 users"""
+"""Get github commits for the last 10 users."""
 import requests
 import sys
 
