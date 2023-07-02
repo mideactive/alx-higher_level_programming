@@ -6,15 +6,11 @@ import sys
 if __name__ == "__main__":
     repository = sys.argv[1]  # Repository name
     owner = sys.argv[2]  # Owner name
-    access_token = "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"
 
     url = f"https://api.github.com/repos/{owner}/{repository}/commits"
 
-    # Set the access token in the headers
-    headers = {"Authorization": f"token {access_token}"}
-
     # Send GET request to retrieve the commits
-    response = requests.get(url, headers=headers)
+    response = requests.get(url)
 
     # Check the response status code
     if response.status_code == 200:
@@ -26,4 +22,4 @@ if __name__ == "__main__":
         author_name = commit['commit']['author']['name']
         print(f"{sha}: {author_name}")
     else:
-        print("Error:", response.status_code)
+        print(response.status_code)
