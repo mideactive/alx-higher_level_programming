@@ -16,7 +16,7 @@ if (!movieId) {
   });
 }
 
-function printCharacters(charactersUrls, index) {
+function printCharacters (charactersUrls, index) {
   if (index >= charactersUrls.length) {
     return;
   }
