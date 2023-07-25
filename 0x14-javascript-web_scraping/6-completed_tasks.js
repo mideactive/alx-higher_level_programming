@@ -16,6 +16,6 @@ request(url, function (error, response, body) {
       }
     });
 
-    console.log(dictionary);
+    console.log(JSON.stringify(dictionary)); // Convert to JSON string
   }
 });
