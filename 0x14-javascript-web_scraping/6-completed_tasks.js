@@ -1,23 +1,21 @@
 #!/usr/bin/node
 const request = require('request');
 const url = process.argv[2];
-let data;
-const dictionary = {};
 
 request(url, function (error, response, body) {
   if (error) {
     console.error(error);
   } else {
-    data = JSON.parse(body);
+    const data = JSON.parse(body);
+    const dictionary = {};
+
     data.forEach(function (result) {
       if (result.completed === true) {
-        const userid = result.userId;
-        if (!(userid in dictionary)) {
-          dictionary[userid] = 0;
-        }
-        dictionary[userid] += 1;
+        const userId = result.userId;
+        dictionary[userId] = (dictionary[userId] || 0) + 1;
       }
     });
+
     console.log(dictionary);
   }
 });
